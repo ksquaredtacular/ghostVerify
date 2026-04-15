@@ -1,0 +1,51 @@
+$hashes = Get-ChildItem -Filter *md5 -Recurse -Name
+
+foreach ($h in $hashes) {
+>> Write-Host "`n--- File: $($h) ---" -ForegroundColor Green
+>> Get-Content $h
+>> Write-Host "------------------------------"
+>> }
+
+----------------------------------------------------------------
+
+foreach ($h in $hashes) {
+ $splitHash = (Get-Content $h) -split ' '
+ $file = $splitHash[1]
+ $hash = $splitHash[0]
+ Write-Host "Checking Hash: $hash for File: $file"
+ #(Get-FileHash $ghost)
+ }
+ 
+---------------------------------------------------------------
+$ghostFile = Get-ChildItem -Filter *gho -Recurse -Name
+
+foreach ($fileName in $ghostFile) {
+ $path = $fileName.Substring(0, $fileName.Length - 4)
+ $parts = (Get-Content $path) -split '\'
+ $dir = $parts[1]
+ $file = $parts[0]
+ 
+ Write-Host "Directory: $dir"
+ Write-Host "md5 File: $file.md5"
+ Write-Host "Ghost File: $file.gho"
+ }
+
+---------------------------------------------------------------
+$ghostFile = Get-ChildItem -Filter *gho -Recurse -Name
+$ghostFile
+
+foreach ($fileName in $ghostFile) {
+	$path = $fileName.Substring(0, $fileName.Length - 4)
+	$path
+	$lines = Get-Content .\$path.md5
+	foreach ($line in $lines) {
+	$parts = $line -split '\\'
+	$dir = $parts[1]
+	$file = $parts[0]
+	$file
+}}
+5557E06E363C8C6A4220B2F043B75901 Gen10_Win2019_SysPrep-051322.gho
+f744754caf2d3a47422b41359d7ad1d5 Gen10_Win2019_SysPrep-060122.gho
+9F493F228E87F5C003E631DE5CAD9CA4 Gen10_Win2022_Sysprep-052323.gho
+B8FA27CD589C7031F109D5098655FBCD IPPM_Gen11_Win2025_Sysprep-012826.gho
+1CB72D6C1A69C56E72230DA46076329E Gen9_Win2022_SysPrep-052223.GHO
